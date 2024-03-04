@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            background-image: url("https://c0.wallpaperflare.com/preview/691/452/28/united-states-billings-faith-chapel-concert.jpg");
+            background-size: cover;
+            background-position: top;
+            background-repeat: no-repeat;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            color: rgb(0, 0, 0);
+            background-color: aliceblue;
+            display: inline-block;
+            width: calc(33.33% - 10px); /* 33.33% width for each container with some spacing */
+            margin: 5px; /* Spacing between containers */
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            font-family: cursive;
+            font-size: 24px;
+            font-weight: bold;
+            border: 2px solid rgb(253, 0, 0); /* Add a black solid border with 2px width */
+            border-radius: 10px; 
+        }
+
+        .container-wrapper {
+            position: relative;
+            margin-top: 25%;
+            left: 50%; /* Center the containers horizontally */
+            transform: translateX(-50%); /* Center the containers horizontally */
+            display: flex;
+            justify-content: space-between;
+            }
+    </style>
+</head>
+<body>
+    <div class="container-wrapper">
+    <div class="container" onclick="playSound('tom.wav')">A</div>
+    <div class="container" onclick="playSound('snare.wav')">S</div>
+    <div class="container" onclick="playSound('Ride.wav')">D</div>
+    <div class="container" onclick="playSound('Clap.wav')">F</div>
+    <div class="container" onclick="playSound('Tink.wav')">G</div>
+    <div class="container" onclick="playSound('Hihat.wav')">H</div>
+    <div class="container" onclick="playSound('BOOM.wav')">J</div>
+    <div class="container" onclick="playSound('Kick.wav')">K</div>
+    <div class="container" onclick="playSound('OpenHat.wav')">L</div>
+    </div>
+
+    <audio id="audio" src="" type="audio/wav"></audio>
+
+    <script>
+        function playSound(soundFile) {
+            var audio = document.getElementById("audio");
+            audio.src = soundFile;
+            audio.play();
+        }
+        document.addEventListener('keydown', function(e)
+        {
+            console.log(e.keyCode);
+            switch(e.keyCode)
+            {
+                case 65:
+                    {playSound('tom.wav');}
+                    break;
+                case 83:
+                    playSound('snare.wav');break;
+                case 68:
+                    playSound('Ride.wav');break;
+                case 70:
+                    playSound('Clap.wav');break;
+                case 71:
+                    playSound('Tink.wav');break;
+                case 72: 
+                    playSound('Hihat.wav');break;
+                case 74:
+                    playSound('BOOM.wav');break;
+                case 75: 
+                    playSound('Kick.wav');break;
+                case 76:
+                    playSound('OpenHat.wav');break;
+            }
+        })
+    </script>
+</body>
+</html>
