@@ -69,12 +69,23 @@
             'tom.wav',
             'snare.wav',
         ];
-
+        let audioCount = 0;
         audioFiles.forEach(audioFile => {
             const audio = new Audio();
             audio.src = audioFile;
+            audio.addEventListener('loadeddata', () => {
+                audioCount++;
+                if (audioCount === audioFiles.length) {
+                    createHTMLContent();
+                }
+            });
         });
 
+        function createHTMLContent() {
+            const body = document.body;
+        }
+
+        
         function playSound(soundFile) {
             var audio = document.getElementById("audio");
             audio.src = soundFile;
