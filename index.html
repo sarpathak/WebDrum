@@ -56,6 +56,25 @@
     <audio id="audio" src="" type="audio/wav"></audio>
 
     <script>
+
+        // Preload audio files
+        const audioFiles = [
+            'BOOM.wav',
+            'Clap.wav',
+            'Hihat.wav',
+            'Kick.wav',
+            'OpenHat.wav',
+            'Ride.wav',
+            'Tink.wav',
+            'tom.wav',
+            'snare.wav',
+        ];
+
+        audioFiles.forEach(audioFile => {
+            const audio = new Audio();
+            audio.src = audioFile;
+        });
+
         function playSound(soundFile) {
             var audio = document.getElementById("audio");
             audio.src = soundFile;
