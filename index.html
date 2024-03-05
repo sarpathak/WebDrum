@@ -28,7 +28,14 @@
             font-weight: bold;
             border: 2px solid rgb(253, 0, 0); /* Add a black solid border with 2px width */
             border-radius: 10px; 
+            transition: all 0.7s;
         }
+
+        .container.active {
+            transform: scale(1.1); /* Increase size */
+            border-color: yellow; /* Change border color */
+        }
+
 
         .container-wrapper {
             position: relative;
@@ -42,80 +49,43 @@
 </head>
 <body>
     <div class="container-wrapper">
-    <div class="container" onclick="playSound('tom.wav')">A</div>
-    <div class="container" onclick="playSound('snare.wav')">S</div>
-    <div class="container" onclick="playSound('Ride.wav')">D</div>
-    <div class="container" onclick="playSound('Clap.wav')">F</div>
-    <div class="container" onclick="playSound('Tink.wav')">G</div>
-    <div class="container" onclick="playSound('Hihat.wav')">H</div>
-    <div class="container" onclick="playSound('BOOM.wav')">J</div>
-    <div class="container" onclick="playSound('Kick.wav')">K</div>
-    <div class="container" onclick="playSound('OpenHat.wav')">L</div>
+    <div class="container" onclick="playSound('tom.wav')" data-key="A">A</div>
+    <div class="container" onclick="playSound('snare.wav')" data-key="S">S</div>
+    <div class="container" onclick="playSound('Ride.wav')" data-key="D">D</div>
+    <div class="container" onclick="playSound('Clap.wav')" data-key="F">F</div>
+    <div class="container" onclick="playSound('Tink.wav')" data-key="G">G</div>
+    <div class="container" onclick="playSound('Hihat.wav')" data-key="H">H</div>
+    <div class="container" onclick="playSound('BOOM.wav')" data-key="J">J</div>
+    <div class="container" onclick="playSound('Kick.wav')" data-key="K">K</div>
+    <div class="container" onclick="playSound('OpenHat.wav')" data-key="L">L</div>
     </div>
 
     <audio id="audio" src="" type="audio/wav"></audio>
-
+    
     <script>
-
-        // Preload audio files
-        const audioFiles = [
-            'BOOM.wav',
-            'Clap.wav',
-            'Hihat.wav',
-            'Kick.wav',
-            'OpenHat.wav',
-            'Ride.wav',
-            'Tink.wav',
-            'tom.wav',
-            'snare.wav',
-        ];
-        let audioCount = 0;
-        audioFiles.forEach(audioFile => {
-            const audio = new Audio();
-            audio.src = audioFile;
-            audio.addEventListener('loadeddata', () => {
-                audioCount++;
-                if (audioCount === audioFiles.length) {
-                    createHTMLContent();
-                }
-            });
-        });
-
-        function createHTMLContent() {
-            const body = document.body;
-        }
-
-        
         function playSound(soundFile) {
             var audio = document.getElementById("audio");
             audio.src = soundFile;
             audio.play();
         }
+
         document.addEventListener('keydown', function(e)
         {
-            switch(e.keyCode)
-            {
-                case 65:
-                    {playSound('tom.wav');}
-                    break;
-                case 83:
-                    playSound('snare.wav');break;
-                case 68:
-                    playSound('Ride.wav');break;
-                case 70:
-                    playSound('Clap.wav');break;
-                case 71:
-                    playSound('Tink.wav');break;
-                case 72: 
-                    playSound('Hihat.wav');break;
-                case 74:
-                    playSound('BOOM.wav');break;
-                case 75: 
-                    playSound('Kick.wav');break;
-                case 76:
-                    playSound('OpenHat.wav');break;
+            const key = document.querySelector(`[data-key="${e.key.toUpperCase()}"]`);
+            if (key) {
+                key.classList.add('active');
+                playSound(key.getAttribute('onclick').split("'")[1]);
             }
-        })
+        });
+
+        document.addEventListener('keyup', function(e)
+        {
+            const key = document.querySelector(`[data-key="${e.key.toUpperCase()}"]`);
+            if (key) {
+                key.classList.remove('active');
+            }
+        });
+
     </script>
 </body>
 </html>
